@@ -113,14 +113,23 @@ function addDrink(eventId) {
     const event = events.find(event => event.id === eventId);
     event.drinks.push({ type: drinkType, volume, price, time, participantId: parseInt(participantId) });
     localStorage.setItem('events', JSON.stringify(events));
-    document.getElementById('message').innerHTML = `<p class="success">Drink přidán!</p>`;
+    
+    const messageContainer = document.getElementById('message');
+    messageContainer.innerHTML = `<p class="success">Drink přidán!</p>`;
+    messageContainer.style.display = 'block';
+
     setTimeout(() => {
-      document.getElementById('message').innerHTML = '';
+      messageContainer.style.display = 'none';
+      messageContainer.innerHTML = '';
+      selectOngoingEvent(eventId); // Aktualizuje stránku pro správu akce po přidání drinku
     }, 3000);
   } else {
-    document.getElementById('message').innerHTML = `<p class="error">Prosím, vyplňte všechna pole!</p>`;
+    const messageContainer = document.getElementById('message');
+    messageContainer.innerHTML = `<p class="error">Prosím, vyplňte všechna pole!</p>`;
+    messageContainer.style.display = 'block';
   }
 }
+
 
 function endEvent(eventId) {
   if (confirm('Opravdu chcete akci ukončit?')) {
