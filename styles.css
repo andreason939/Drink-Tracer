@@ -1,3 +1,72 @@
+/* Optimalizace pro mobilní zařízení */
+@media (max-width: 600px) {
+  body {
+    height: auto;
+    padding: 10px;
+  }
+
+  .container {
+    width: 100%;
+    padding: 10px;
+    box-shadow: none;
+  }
+
+  header {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  nav button {
+    width: 100%;
+    padding: 10px;
+  }
+
+  main {
+    margin-top: 10px;
+  }
+
+  .back-container {
+    justify-content: center;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .option-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  form {
+    width: 100%;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: 100%;
+  }
+
+  table {
+    font-size: 0.9em;
+  }
+
+  th, td {
+    padding: 5px;
+  }
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   background: linear-gradient(to right, #2c3e50, #4ca1af);
@@ -5,7 +74,7 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   height: 100vh;
   text-align: center;
@@ -195,18 +264,16 @@ td {
   width: 100%;
 }
 
-
 .option-buttons {
   display: flex;
   justify-content: flex-start;
-  gap: 10px; /* Přidáme mezeru mezi tlačítky */
+  gap: 10px;
   margin-top: 10px;
 }
 
 .summary-table {
   margin-top: 20px;
 }
-
 
 .event-list li {
   border-bottom: 1px solid #ccc;
@@ -218,18 +285,5 @@ td {
 
 .event-list li:last-child {
   border-bottom: none;
-}
-
-@media (max-width: 600px) {
-  .container {
-    width: 90%;
-    padding: 10px;
-  }
-
-  input[type="text"],
-  input[type="number"],
-  select {
-    width: calc(100% - 12px);
-  }
 }
 

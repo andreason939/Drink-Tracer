@@ -108,22 +108,17 @@ function addDrink(eventId) {
   const volume = volumeMap[drinkType];
   const time = new Date().toISOString();
 
-  const messageElement = document.getElementById('message');
-
   if (participantId && drinkType && volume && !isNaN(price)) {
     const events = JSON.parse(localStorage.getItem('events')) || [];
     const event = events.find(event => event.id === eventId);
     event.drinks.push({ type: drinkType, volume, price, time, participantId: parseInt(participantId) });
     localStorage.setItem('events', JSON.stringify(events));
-    messageElement.innerHTML = `<p class="success">Drink přidán!</p>`;
-    messageElement.style.display = 'block';
+    document.getElementById('message').innerHTML = `<p class="success">Drink přidán!</p>`;
     setTimeout(() => {
-      messageElement.innerHTML = '';
-      messageElement.style.display = 'none';
+      document.getElementById('message').innerHTML = '';
     }, 3000);
   } else {
-    messageElement.innerHTML = `<p class="error">Prosím, vyplňte všechna pole!</p>`;
-    messageElement.style.display = 'block';
+    document.getElementById('message').innerHTML = `<p class="error">Prosím, vyplňte všechna pole!</p>`;
   }
 }
 
