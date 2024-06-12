@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function showNewEventForm() {
   document.getElementById('content').innerHTML = `
-    <h2>Nová akce</h2>
+    <h2>NovÃ¡ akce</h2>
     <form id="newEventForm">
-      <label for="eventName">Název akce:</label>
+      <label for="eventName">NÃ¡zev akce:</label>
       <input type="text" id="eventName" name="eventName" required>
-      <button type="submit">Vytvoøit</button>
+      <button type="submit">VytvoÅ™it</button>
     </form>
   `;
 
@@ -19,7 +19,7 @@ function showNewEventForm() {
     const newEvent = { id: Date.now(), name: eventName, status: 'ongoing', participants: [], drinks: [] };
     events.push(newEvent);
     localStorage.setItem('events', JSON.stringify(events));
-    alert('Akce vytvoøena!');
+    alert('Akce vytvoÅ™ena!');
     showOngoingEvents();
   });
 }
@@ -31,7 +31,7 @@ function showOngoingEvents() {
     <li><button onclick="selectOngoingEvent(${event.id})">${event.name}</button></li>
   `).join('');
   document.getElementById('content').innerHTML = `
-    <h2>Probíhající akce</h2>
+    <h2>ProbÃ­hajÃ­cÃ­ akce</h2>
     <ul class="event-list">${eventList}</ul>
   `;
 }
@@ -40,24 +40,24 @@ function selectOngoingEvent(eventId) {
   document.getElementById('content').innerHTML = `
     <h2>Spravovat akci</h2>
     <div class="action-buttons">
-      <button class="register-button" onclick="registerParticipant(${eventId})">Registrovat úèastníka</button>
-      <button class="center-button add-drink-button" onclick="showAddDrinkForm(${eventId})">Pøidat drink</button>
-      <button class="end-event-button" onclick="endEvent(${eventId})">Ukonèit akci</button>
+      <button class="register-button" onclick="registerParticipant(${eventId})">Registrovat ÃºÄastnÃ­ka</button>
+      <button class="center-button add-drink-button" onclick="showAddDrinkForm(${eventId})">PÅ™idat drink</button>
+      <button class="end-event-button" onclick="endEvent(${eventId})">UkonÄit akci</button>
     </div>
-    <div class="back-container"><button class="back-button" onclick="showOngoingEvents()">Zpìt</button></div>
+    <div class="back-container"><button class="back-button" onclick="showOngoingEvents()">ZpÄ›t</button></div>
   `;
 }
 
 function registerParticipant(eventId) {
-  const name = prompt('Zadejte své jméno:');
+  const name = prompt('Zadejte svÃ© jmÃ©no:');
   if (name) {
     const events = JSON.parse(localStorage.getItem('events')) || [];
     const event = events.find(event => event.id === eventId);
     event.participants.push({ name, id: Date.now() });
     localStorage.setItem('events', JSON.stringify(events));
-    alert('Úèastník zaregistrován!');
+    alert('ÃšÄastnÃ­k zaregistrovÃ¡n!');
   }
-  selectOngoingEvent(eventId); // Aktualizuje stránku pro správu akce
+  selectOngoingEvent(eventId); // Aktualizuje strÃ¡nku pro sprÃ¡vu akce
 }
 
 function showAddDrinkForm(eventId) {
@@ -66,26 +66,26 @@ function showAddDrinkForm(eventId) {
   const participantOptions = event.participants.map(participant => `<option value="${participant.id}">${participant.name}</option>`).join('');
 
   document.getElementById('content').innerHTML = `
-    <h2>Pøidat drink</h2>
+    <h2>PÅ™idat drink</h2>
     <form id="addDrinkForm">
-      <label for="participantId">Úèastník:</label>
+      <label for="participantId">ÃšÄastnÃ­k:</label>
       <select id="participantId" name="participantId" required>
         ${participantOptions}
       </select>
       <label for="drinkType">Typ drinku:</label>
       <select id="drinkType" name="drinkType" required>
         <option value="Pivo">Pivo 0,5l</option>
-        <option value="Víno">Víno 0,2l</option>
+        <option value="VÃ­no">VÃ­no 0,2l</option>
         <option value="Drink">Drink 0,3l</option>
-        <option value="Panák velkı">Panák velkı 40%</option>
-        <option value="Panák malı">Panák malı 40%</option>
+        <option value="PanÃ¡k velkÃ½">PanÃ¡k velkÃ½ 40%</option>
+        <option value="PanÃ¡k malÃ½">PanÃ¡k malÃ½ 40%</option>
       </select>
-      <label for="price">Cena (Kè):</label>
+      <label for="price">Cena (KÄ):</label>
       <input type="number" id="price" name="price" required>
-      <button type="submit">Pøidat</button>
+      <button type="submit">PÅ™idat</button>
     </form>
     <div id="message" class="message"></div>
-    <div class="back-container"><button class="back-button" onclick="selectOngoingEvent(${eventId})">Zpìt</button></div>
+    <div class="back-container"><button class="back-button" onclick="selectOngoingEvent(${eventId})">ZpÄ›t</button></div>
   `;
 
   document.getElementById('addDrinkForm').addEventListener('submit', function(event) {
@@ -100,10 +100,10 @@ function addDrink(eventId) {
   const price = parseFloat(document.getElementById('price').value);
   const volumeMap = {
     "Pivo": 0.5,
-    "Víno": 0.2,
+    "VÃ­no": 0.2,
     "Drink": 0.3,
-    "Panák velkı": 0.04,
-    "Panák malı": 0.02
+    "PanÃ¡k velkÃ½": 0.04,
+    "PanÃ¡k malÃ½": 0.02
   };
   const volume = volumeMap[drinkType];
   const time = new Date().toISOString();
@@ -115,25 +115,25 @@ function addDrink(eventId) {
     const event = events.find(event => event.id === eventId);
     event.drinks.push({ type: drinkType, volume, price, time, participantId: parseInt(participantId) });
     localStorage.setItem('events', JSON.stringify(events));
-    messageElement.innerHTML = `<p class="success">Drink pøidán!</p>`;
+    messageElement.innerHTML = `<p class="success">Drink pÅ™idÃ¡n!</p>`;
     messageElement.style.display = 'block';
     setTimeout(() => {
       messageElement.innerHTML = '';
       messageElement.style.display = 'none';
     }, 3000);
   } else {
-    messageElement.innerHTML = `<p class="error">Prosím, vyplòte všechna pole!</p>`;
+    messageElement.innerHTML = `<p class="error">ProsÃ­m, vyplÅˆte vÅ¡echna pole!</p>`;
     messageElement.style.display = 'block';
   }
 }
 
 function endEvent(eventId) {
-  if (confirm('Opravdu chcete akci ukonèit?')) {
+  if (confirm('Opravdu chcete akci ukonÄit?')) {
     const events = JSON.parse(localStorage.getItem('events')) || [];
     const event = events.find(event => event.id === eventId);
     event.status = 'ended';
     localStorage.setItem('events', JSON.stringify(events));
-    alert('Akce ukonèena!');
+    alert('Akce ukonÄena!');
     showOngoingEvents();
   }
 }
@@ -148,7 +148,7 @@ function showEndedEvents() {
     </li>
   `).join('');
   document.getElementById('content').innerHTML = `
-    <h2>Ukonèené akce</h2>
+    <h2>UkonÄenÃ© akce</h2>
     <ul class="event-list">${eventList}</ul>
   `;
 }
@@ -159,18 +159,18 @@ function showEventOptions(eventId) {
   const participantOptions = event.participants.map(participant => `<option value="${participant.id}">${participant.name}</option>`).join('');
 
   document.getElementById('content').innerHTML = `
-    <h2>Monosti zobrazení</h2>
-    <label for="participantFilter">Zvolit úèastníka:</label>
+    <h2>MoÅ¾nosti zobrazenÃ­</h2>
+    <label for="participantFilter">Zvolit ÃºÄastnÃ­ka:</label>
     <select id="participantFilter" name="participantFilter">
-      <option value="all">Všichni</option>
+      <option value="all">VÅ¡ichni</option>
       ${participantOptions}
     </select>
     <div class="option-buttons">
-      <button onclick="showEventDetails(${event.id}, 'timeline')">Prùbìná tabulka v èase</button>
-      <button onclick="showEventDetails(${event.id}, 'summary')">Celkové vısledky</button>
+      <button onclick="showEventDetails(${event.id}, 'timeline')">PrÅ¯bÄ›Å¾nÃ¡ tabulka v Äase</button>
+      <button onclick="showEventDetails(${event.id}, 'summary')">CelkovÃ© vÃ½sledky</button>
       <button onclick="showMVP(${event.id})">MVP</button>
     </div>
-    <div class="back-container"><button class="back-button" onclick="showEndedEvents()">Zpìt</button></div>
+    <div class="back-container"><button class="back-button" onclick="showEndedEvents()">ZpÄ›t</button></div>
   `;
 }
 
@@ -218,7 +218,7 @@ function showEventDetails(eventId, viewType) {
             <td>${type}</td>
             <td>${data.volume.toFixed(2)}</td>
             <td>${data.count}</td>
-            <td>${data.price.toFixed(2)} Kè</td>
+            <td>${data.price.toFixed(2)} KÄ</td>
           </tr>
         `).join('');
         return drinkDetails;
@@ -231,16 +231,16 @@ function showEventDetails(eventId, viewType) {
         <thead>
           <tr>
             ${viewType === 'timeline' ? `
-              <th>Úèastník</th>
+              <th>ÃšÄastnÃ­k</th>
               <th>Typ drinku</th>
               <th>Objem (l)</th>
-              <th>Èas</th>
+              <th>ÄŒas</th>
             ` : `
-              <th>Úèastník</th>
+              <th>ÃšÄastnÃ­k</th>
               <th>Typ drinku</th>
-              <th>Celkovı objem (l)</th>
-              <th>Poèet</th>
-              <th>Celková cena (Kè)</th>
+              <th>CelkovÃ½ objem (l)</th>
+              <th>PoÄet</th>
+              <th>CelkovÃ¡ cena (KÄ)</th>
             `}
           </tr>
         </thead>
@@ -248,7 +248,7 @@ function showEventDetails(eventId, viewType) {
           ${participantList}
         </tbody>
       </table>
-      <div class="back-container"><button class="back-button" onclick="showEventOptions(${eventId})">Zpìt</button></div>
+      <div class="back-container"><button class="back-button" onclick="showEventOptions(${eventId})">ZpÄ›t</button></div>
     `;
   }
 }
@@ -258,7 +258,7 @@ function showMVP(eventId) {
   const event = events.find(event => event.id === eventId);
 
   if (event) {
-    const drinkTypes = ["Pivo", "Víno", "Drink", "Panák velkı", "Panák malı"];
+    const drinkTypes = ["Pivo", "VÃ­no", "Drink", "PanÃ¡k velkÃ½", "PanÃ¡k malÃ½"];
     const mvpList = drinkTypes.map(type => {
       let maxVolume = 0;
       let maxCount = 0;
@@ -290,7 +290,7 @@ function showMVP(eventId) {
         <td>${mvp.mvp}</td>
         <td>${mvp.maxVolume.toFixed(2)}</td>
         <td>${mvp.maxCount}</td>
-        <td>${mvp.maxPrice.toFixed(2)} Kè</td>
+        <td>${mvp.maxPrice.toFixed(2)} KÄ</td>
       </tr>
     `).join('');
 
@@ -304,10 +304,10 @@ function showMVP(eventId) {
         <thead>
           <tr>
             <th>Typ drinku</th>
-            <th>Úèastník</th>
-            <th>Celkovı objem (l)</th>
-            <th>Poèet</th>
-            <th>Celková cena (Kè)</th>
+            <th>ÃšÄastnÃ­k</th>
+            <th>CelkovÃ½ objem (l)</th>
+            <th>PoÄet</th>
+            <th>CelkovÃ¡ cena (KÄ)</th>
           </tr>
         </thead>
         <tbody>
@@ -316,11 +316,11 @@ function showMVP(eventId) {
       </table>
       <div class="summary-table">
         <h3>Souhrn</h3>
-        <p>Poèet drinkù celkem: ${totalDrinks}</p>
+        <p>PoÄet drinkÅ¯ celkem: ${totalDrinks}</p>
         <p>Objem celkem: ${totalVolume.toFixed(2)} l</p>
-        <p>Cena celkem: ${totalPrice.toFixed(2)} Kè</p>
+        <p>Cena celkem: ${totalPrice.toFixed(2)} KÄ</p>
       </div>
-      <div class="back-container"><button class="back-button" onclick="showEventOptions(${eventId})">Zpìt</button></div>
+      <div class="back-container"><button class="back-button" onclick="showEventOptions(${eventId})">ZpÄ›t</button></div>
     `;
   }
 }
@@ -330,7 +330,7 @@ function deleteEvent(eventId) {
     let events = JSON.parse(localStorage.getItem('events')) || [];
     events = events.filter(event => event.id !== eventId);
     localStorage.setItem('events', JSON.stringify(events));
-    alert('Akce smazána!');
+    alert('Akce smazÃ¡na!');
     showEndedEvents();
   }
 }
